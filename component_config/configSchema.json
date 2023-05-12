@@ -2,12 +2,12 @@
   "type": "object",
   "title": "extractor configuration",
   "required": [
-    "print_hello"
+    "url_address"
   ],
   "properties": {
-    "print_hello": {
-      "type": "boolean",
-      "title": "Print Hello",
+    "url_address": {
+      "type": "string",
+      "title": "Insert flexi URL",
       "propertyOrder": 1
     },
     "debug": {
