@@ -1,19 +1,5 @@
 {
   "type": "object",
-  "title": "extractor configuration",
-  "required": [
-    "url_address"
-  ],
-  "properties": {
-    "url_address": {
-      "type": "string",
-      "title": "Insert flexi URL",
-      "propertyOrder": 1
-    },
-    "debug": {
-      "type": "boolean",
-      "title": "Debug",
-      "propertyOrder": 2
-    }
+  "title": "extractor configuration"
   }
-}
+
