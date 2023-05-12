@@ -1,2 +1,11 @@
-{ }
+{
+  "type": "object",
+  "title": "extractor configuration",
+  "required": [],
+  "debug": {
+    "type": "boolean",
+    "title": "Debug",
+    "propertyOrder": 2
+  }
+}
 
