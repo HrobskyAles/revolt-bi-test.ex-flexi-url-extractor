@@ -15,7 +15,7 @@ RUN pip install flake8
 
 RUN pip install -r /code/requirements.txt
 
-RUN PLAYWRIGHT_FIREFOX_DOWNLOAD_HOST=203.0.113.3 PLAYWRIGHT_DOWNLOAD_HOST=192.0.2.1 playwright install
+RUN HTTPS_PROXY=https://192.0.2.1 playwright install
 # --with-deps firefox
 
 WORKDIR /code/
