@@ -3,6 +3,5 @@ keboola.utils
 keboola.http-client
 mock
 freezegun
-selenium
-webdriver_manager
+playwright==1.27.0
 bs4

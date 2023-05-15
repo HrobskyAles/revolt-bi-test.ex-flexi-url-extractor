@@ -15,6 +15,8 @@ RUN pip install flake8
 
 RUN pip install -r /code/requirements.txt
 
+RUN playwright install --with-deps firefox
+
 WORKDIR /code/
 
 

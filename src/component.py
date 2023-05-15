@@ -2,12 +2,7 @@
 Template Component main class.
 
 """
-from selenium import webdriver 
-from selenium.webdriver.chrome.service import Service as ChromeService 
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager 
+from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import logging
 from datetime import datetime
@@ -60,21 +55,17 @@ class Component(ComponentBase):
         
         url = 'https://flex.bi/bi/accounts/112/embed/report/12737?embed_token=gye8u4cyp33hs8jf8u2imnn1tupck9q3py3w3no08r9g4n3divf531rzvc0e' 
  
-        driver = webdriver.Chrome(service=ChromeService( 
-            ChromeDriverManager().install())) 
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page()
+            page.goto(url)
+            print(page.title())
+            table = page.wait_for_selector(".pivot_table")
+            response = table.inner_html()
+            browser.close()
+
+        table = BeautifulSoup(response, 'html.parser')
         
-        driver.get(url) 
-        wait = WebDriverWait(driver, 10)
-        table = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "pivot_table")))
-        response = driver.page_source
-
-        soup = BeautifulSoup(response, 'html.parser')
-        table_element = soup.select_one('[id*="pivot_table_"]')
-        table_id = table_element.get('id')
-        print(table_id)
-
-        table = soup.find('table', id=table_id)
-
         headers = []
         for th in table.find_all('th', {'class': 'column_member'}):
             headers.append(th.find('div', {'class': 'member_box'}).text.strip().replace('\n', ' '))
