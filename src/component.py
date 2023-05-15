@@ -56,7 +56,7 @@ class Component(ComponentBase):
         url = 'https://flex.bi/bi/accounts/112/embed/report/12737?embed_token=gye8u4cyp33hs8jf8u2imnn1tupck9q3py3w3no08r9g4n3divf531rzvc0e' 
  
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            browser = p.firefox.launch()
             page = browser.new_page()
             page.goto(url)
             print(page.title())
@@ -65,7 +65,7 @@ class Component(ComponentBase):
             browser.close()
 
         table = BeautifulSoup(response, 'html.parser')
-        
+
         headers = []
         for th in table.find_all('th', {'class': 'column_member'}):
             headers.append(th.find('div', {'class': 'member_box'}).text.strip().replace('\n', ' '))
